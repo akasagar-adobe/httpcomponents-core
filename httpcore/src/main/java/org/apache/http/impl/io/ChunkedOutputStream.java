@@ -211,7 +211,7 @@ public class ChunkedOutputStream extends OutputStream {
         return isErrorCase;
     }
 
-    public void setErrorCase(boolean errorCase) {
+    public void setErrorCase(final boolean errorCase) {
         isErrorCase = errorCase;
     }
 }
