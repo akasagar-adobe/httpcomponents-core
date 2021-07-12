@@ -58,6 +58,8 @@ public class ChunkedOutputStream extends OutputStream {
     /** True if the stream is closed. */
     private boolean closed = false;
 
+    private boolean isErrorCase = false;
+
     /**
      * Wraps a session output buffer and chunk-encodes the output.
      *
@@ -125,6 +127,7 @@ public class ChunkedOutputStream extends OutputStream {
     }
 
     protected void writeClosingChunk() throws IOException {
+        if(isErrorCase) return;
         // Write the final chunk.
         this.out.writeLine("0");
         this.out.writeLine("");
@@ -202,5 +205,13 @@ public class ChunkedOutputStream extends OutputStream {
             finish();
             this.out.flush();
         }
+    }
+
+    public boolean isErrorCase() {
+        return isErrorCase;
+    }
+
+    public void setErrorCase(boolean errorCase) {
+        isErrorCase = errorCase;
     }
 }
